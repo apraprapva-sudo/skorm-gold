@@ -1,0 +1,524 @@
+<!DOCTYPE html><html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SKORM GOLD</title><style>
+:root {
+  --gold:#f5c542;
+  --bg:#090d14;
+  --panel:#172231;
+  --text:#f4f6fb;
+  --muted:#aab5c5;
+  --green:#42d392;
+}
+
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  background:radial-gradient(circle at top,#26364a,#090d14 65%);
+  color:var(--text);
+  font:16px/1.5 Arial,sans-serif;
+}
+
+main {
+  max-width:720px;
+  margin:auto;
+  padding:18px 14px 35px;
+}
+
+header { text-align:center; padding:15px 5px 22px; }
+
+.game-brand {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:0 auto 15px;
+  padding:12px;
+  max-width:440px;
+  border:1px solid #806323;
+  border-radius:16px;
+  background:linear-gradient(120deg,#171e29,#302514);
+}
+
+.game-art {
+  width:65px;
+  height:65px;
+  flex-shrink:0;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:linear-gradient(145deg,#b92b26,#161b27,#d99e16);
+  border:2px solid var(--gold);
+  font-size:34px;
+}
+
+.game-title {
+  color:#ffe08a;
+  font-size:19px;
+  font-weight:900;
+  line-height:1.2;
+  text-align:left;
+}
+
+.game-subtitle {
+  color:#c6ced8;
+  font-size:11px;
+  text-align:left;
+  margin-top:5px;
+}
+
+.logo {
+  color:var(--gold);
+  font-size:clamp(32px,8vw,48px);
+  font-weight:900;
+  letter-spacing:2px;
+  text-shadow:0 2px 18px #f5c54255;
+}
+
+.tag,.notice { color:var(--muted); }
+
+.creator-twitch { margin:15px auto; }
+
+.creator-twitch a {
+  color:#c9a7ff;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.twitch-mark {
+  display:inline-grid;
+  place-items:center;
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  background:#9146ff;
+  color:white;
+  font-size:23px;
+  margin-bottom:5px;
+}
+
+.section,.card {
+  background:linear-gradient(145deg,#1b2635,#121a26);
+  border:1px solid #2b394c;
+  border-radius:18px;
+  padding:18px;
+  margin:14px 0;
+}
+
+.balance .card { text-align:center; }
+
+.label {
+  color:var(--muted);
+  font-size:13px;
+}
+
+.amount {
+  color:var(--gold);
+  font-size:34px;
+  font-weight:900;
+}
+
+h2 { font-size:19px; margin:0 0 8px; }
+
+p { color:var(--muted); margin:6px 0 12px; }
+
+button {
+  width:100%;
+  min-height:49px;
+  padding:13px;
+  border:0;
+  border-radius:12px;
+  background:var(--gold);
+  color:#17130a;
+  font-size:16px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+button:disabled {
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.secondary {
+  background:#26364b;
+  color:white;
+  border:1px solid #3a4b62;
+}
+
+.wheel-area {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  padding:20px 0;
+}
+
+.wheel {
+  width:min(78vw,290px);
+  aspect-ratio:1;
+  border-radius:50%;
+  border:8px solid #dcae36;
+  position:relative;
+  background:conic-gradient(
+    #f7c94b 0deg 36deg,
+    #26364b 36deg 72deg,
+    #e8ad2e 72deg 108deg,
+    #34465e 108deg 144deg,
+    #f7c94b 144deg 180deg,
+    #26364b 180deg 216deg,
+    #e8ad2e 216deg 252deg,
+    #34465e 252deg 288deg,
+    #f7c94b 288deg 324deg,
+    #26364b 324deg 360deg
+  );
+  box-shadow:0 0 0 4px #5d4518,0 8px 24px #0009;
+  transition:transform 4s cubic-bezier(.12,.75,.12,1);
+}
+
+.wheel:after {
+  content:"";
+  position:absolute;
+  inset:38%;
+  border-radius:50%;
+  background:radial-gradient(circle,#fff1ad,#d89a1d 65%,#68490d);
+  border:4px solid #fff0b0;
+}
+
+.wheel-number {
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:1;
+  font-weight:900;
+  font-size:19px;
+  color:#17130a;
+}
+
+.wheel-number:nth-child(1) { transform:translate(-50%,-50%) rotate(0deg) translateY(-102px); }
+.wheel-number:nth-child(2) { transform:translate(-50%,-50%) rotate(36deg) translateY(-102px); }
+.wheel-number:nth-child(3) { transform:translate(-50%,-50%) rotate(72deg) translateY(-102px); }
+.wheel-number:nth-child(4) { transform:translate(-50%,-50%) rotate(108deg) translateY(-102px); }
+.wheel-number:nth-child(5) { transform:translate(-50%,-50%) rotate(144deg) translateY(-102px); }
+.wheel-number:nth-child(6) { transform:translate(-50%,-50%) rotate(180deg) translateY(-102px); }
+.wheel-number:nth-child(7) { transform:translate(-50%,-50%) rotate(216deg) translateY(-102px); }
+.wheel-number:nth-child(8) { transform:translate(-50%,-50%) rotate(252deg) translateY(-102px); }
+.wheel-number:nth-child(9) { transform:translate(-50%,-50%) rotate(288deg) translateY(-102px); }
+.wheel-number:nth-child(10) { transform:translate(-50%,-50%) rotate(324deg) translateY(-102px); }
+
+.wheel-pointer {
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
+  width:0;
+  height:0;
+  border-left:13px solid transparent;
+  border-right:13px solid transparent;
+  border-top:25px solid #fff1b7;
+}
+
+.status {
+  min-height:22px;
+  color:var(--green);
+  font-size:14px;
+  margin-top:9px;
+}
+
+.goldbar {
+  text-align:center;
+  font-size:65px;
+  padding:8px;
+  cursor:pointer;
+  user-select:none;
+}
+
+.goldbar:active { transform:scale(.94); }
+
+.counter {
+  text-align:center;
+  color:var(--gold);
+  font-size:22px;
+  font-weight:bold;
+}
+
+.progress-wrap {
+  height:13px;
+  background:#273447;
+  border-radius:99px;
+  overflow:hidden;
+  margin:12px 0;
+}
+
+.progress {
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#d99e16,#ffe27b);
+}
+
+input {
+  width:100%;
+  padding:14px;
+  margin:7px 0 12px;
+  border:1px solid #2b394c;
+  border-radius:11px;
+  background:#0d1420;
+  color:white;
+  font-size:16px;
+}
+
+.notice {
+  font-size:13px;
+  margin-top:10px;
+}
+
+footer {
+  text-align:center;
+  padding:20px 8px;
+  color:var(--muted);
+}
+
+footer a {
+  display:inline-block;
+  margin-top:10px;
+  padding:13px 20px;
+  border-radius:12px;
+  background:var(--gold);
+  color:#17130a;
+  text-decoration:none;
+  font-weight:900;
+}
+
+@media(max-width:390px) {
+  .wheel { width:250px; }
+  .wheel-number { font-size:17px; }
+}
+</style></head><body>
+<main><header>
+  <div class="game-brand">
+    <div class="game-art">⚔️</div>
+    <div>
+      <div class="game-title">BLOOD STRIKE<br>БЕСПЛАТНОЕ ЗОЛОТО</div>
+      <div class="game-subtitle">Награды для игрового сообщества</div>
+    </div>
+  </div>  <div class="creator-twitch">
+    <a href="https://www.twitch.tv/skorm5" target="_blank">
+      <div class="twitch-mark">T</div><br>
+      Разработано стримером<br>
+      twitch.tv/skorm5
+    </a>
+  </div>  <div class="logo">SKORM GOLD</div>
+  <div class="tag">Играй • Копи • Получай</div>
+  <div class="notice">Фан-проект сообщества. Не является официальным сайтом Blood Strike.</div>
+</header><div class="balance">
+  <div class="card">
+    <div class="label">ТВОЁ ЗОЛОТО</div>
+    <div class="amount" id="gold">0</div>
+  </div>
+</div><section class="section">
+  <h2>🎰 Ежедневная рулетка</h2>
+  <p>Одна попытка в день. Выигрыш — от 2 до 10 золота.</p>  <div class="wheel-area">
+    <div class="wheel-pointer"></div>
+    <div class="wheel" id="wheel">
+      <span class="wheel-number">2</span>
+      <span class="wheel-number">3</span>
+      <span class="wheel-number">4</span>
+      <span class="wheel-number">5</span>
+      <span class="wheel-number">6</span>
+      <span class="wheel-number">7</span>
+      <span class="wheel-number">8</span>
+      <span class="wheel-number">9</span>
+      <span class="wheel-number">10</span>
+      <span class="wheel-number">⭐</span>
+    </div>
+  </div><button id="spin">КРУТИТЬ РУЛЕТКУ</button>
+
+  <div class="status" id="spinStatus"></div>
+</section><section class="section">
+  <h2>🥇 Добыча золота</h2>
+  <p>Нажми на золотой слиток 999 раз, чтобы получить 1 золото. Награда доступна один раз в день.</p>  <div class="goldbar" id="goldbar" role="button" tabindex="0">🪙</div>  <div class="counter"><span id="clicks">0</span> / 999</div>  <div class="progress-wrap">
+    <div class="progress" id="progress"></div>
+  </div><button class="secondary" id="mine">НАЖАТЬ НА СЛИТОК</button>
+
+  <div class="status" id="mineStatus"></div>
+</section><section class="section">
+  <h2>📤 Вывод золота</h2>
+  <p>Минимальная сумма вывода — 100 золота.</p><label class="label" for="playerNick">Игровой ник Blood Strike</label>
+<input id="playerNick" type="text" maxlength="40" placeholder="Введи свой игровой ник"><label class="label" for="withdrawAmount">Сумма вывода</label>
+<input id="withdrawAmount" type="number" min="100" step="1" placeholder="Минимум 100">
+
+<button id="withdraw">СОЗДАТЬ ЗАЯВКУ</button>
+
+  <div class="status" id="withdrawStatus"></div>  <div class="notice">
+    <strong style="color:var(--gold)">📸 Инструкция после вывода</strong><br>
+    После создания заявки сделай скриншот экрана. Отправь его по ссылке ниже и обязательно укажи свой игровой ID Blood Strike вместе со скриншотом.
+    <br><br>
+    <a href="https://t.me/c/4325029856/606" target="_blank" style="color:var(--gold);word-break:break-all">
+      ОТПРАВИТЬ СКРИНШОТ В TELEGRAM
+    </a>
+  </div>  <div class="notice">
+    Демонстрационный режим: заявки не отправляются автоматически администратору. Баланс хранится только в браузере этого устройства.
+  </div>
+</section><footer>
+  <div>Новости и общение SKORM GOLD</div>
+  <a href="https://t.me/skorm555" target="_blank">ПЕРЕЙТИ В TELEGRAM</a>
+  <div class="notice">SKORM GOLD</div>
+</footer></main><script>
+(function() {
+  const key = 'skormGoldDemoV2';
+
+  function today() {
+    const d = new Date();
+    return d.getFullYear() + '-' +
+      String(d.getMonth()+1).padStart(2,'0') + '-' +
+      String(d.getDate()).padStart(2,'0');
+  }
+
+  let state = {};
+
+  try {
+    state = JSON.parse(localStorage.getItem(key)) || {};
+  } catch(e) {
+    state = {};
+  }
+
+  state.gold = Number.isFinite(state.gold) ? state.gold : 0;
+
+  if (state.clickDate !== today()) {
+    state.clicks = 0;
+  }
+
+  function save() {
+    try {
+      localStorage.setItem(key, JSON.stringify(state));
+    } catch(e) {}
+    render();
+  }
+
+  function render() {
+    document.getElementById('gold').textContent = state.gold;
+    document.getElementById('clicks').textContent = state.clicks || 0;
+
+    document.getElementById('progress').style.width =
+      (Math.min(state.clicks || 0,999) / 999 * 100) + '%';
+
+    const spun = state.spinDate === today();
+    document.getElementById('spin').disabled = spun;
+
+    if (spun) {
+      document.getElementById('spinStatus').textContent =
+        'Сегодня попытка уже использована.';
+    }
+
+    const mined = state.rewardDate === today();
+    document.getElementById('mine').disabled = mined;
+
+    if (mined) {
+      document.getElementById('mineStatus').textContent =
+        'Сегодняшняя награда уже получена.';
+    }
+  }
+
+  document.getElementById('spin').addEventListener('click', function() {
+    if (state.spinDate === today()) return;
+
+    const button = document.getElementById('spin');
+    const wheel = document.getElementById('wheel');
+    const status = document.getElementById('spinStatus');
+
+    const win = Math.floor(Math.random() * 9) + 2;
+
+    button.disabled = true;
+    status.textContent = 'Рулетка крутится...';
+
+    const turns = 5 + Math.floor(Math.random() * 4);
+    const angle = Math.floor(Math.random() * 360);
+
+    wheel.style.transform =
+      'rotate(' + (turns * 360 + angle) + 'deg)';
+
+    setTimeout(function() {
+      state.gold += win;
+      state.spinDate = today();
+      save();
+
+      status.textContent = 'Поздравляем! Выигрыш: +' + win + ' золота.';
+    },4100);
+  });
+
+  function clickMine() {
+    if (state.rewardDate === today()) return;
+
+    if (state.clickDate !== today()) {
+      state.clicks = 0;
+      state.clickDate = today();
+    }
+
+    state.clicks = Math.min(999, (state.clicks || 0) + 1);
+
+    if (state.clicks >= 999) {
+      state.gold += 1;
+      state.rewardDate = today();
+
+      document.getElementById('mineStatus').textContent =
+        'Готово! Начислено 1 золото. Возвращайся завтра.';
+    } else {
+      document.getElementById('mineStatus').textContent =
+        'Осталось ' + (999 - state.clicks) + ' нажатий до награды.';
+    }
+
+    save();
+  }
+
+  document.getElementById('mine').addEventListener('click', clickMine);
+  document.getElementById('goldbar').addEventListener('click', clickMine);
+
+  document.getElementById('goldbar').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      clickMine();
+    }
+  });
+
+  document.getElementById('withdraw').addEventListener('click', function() {
+    const nick = document.getElementById('playerNick').value.trim();
+    const amount = Number(document.getElementById('withdrawAmount').value);
+    const out = document.getElementById('withdrawStatus');
+
+    if (!nick) {
+      out.textContent = 'Введи свой игровой ник.';
+      return;
+    }
+
+    if (!Number.isInteger(amount) || amount < 100) {
+      out.textContent = 'Минимальная сумма вывода — 100 золота.';
+      return;
+    }
+
+    if (amount > state.gold) {
+      out.textContent = 'Недостаточно золота на балансе.';
+      return;
+    }
+
+    state.gold -= amount;
+
+    state.lastWithdrawal = {
+      nick: nick,
+      amount: amount,
+      date: new Date().toISOString(),
+      status: 'Ожидает проверки'
+    };
+
+    save();
+
+    out.textContent =
+      'Заявка сохранена в этом браузере. Сделай скриншот и отправь его в Telegram. Не забудь игровой ID Blood Strike.';
+  });
+
+  render();
+})();
+</script></body>
+</html>
